@@ -6,9 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -27,18 +27,19 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CoffeeMastersTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    FirstComposable();
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    App()
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun FirstComposable() {
-    var name = remember { mutableStateOf("") }
+    val name = remember { mutableStateOf("") }
 
     Column() {
         Text("Hello ${name.value}",

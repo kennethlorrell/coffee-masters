@@ -19,7 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.deepdark.coffeemasters.ui.theme.LightBrown
+import com.deepdark.coffeemasters.ui.theme.AlternativeLight
 
 @Preview(showBackground = true, widthDp = 400)
 @Composable
@@ -34,8 +34,6 @@ fun OffersPage() {
 
 @Composable
 fun Offer(title: String, description: String) {
-
-
     Box(
         modifier = Modifier.padding(16.dp)
     ) {
@@ -57,7 +55,7 @@ fun Offer(title: String, description: String) {
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
                     .padding(16.dp)
-                    .background(LightBrown)
+                    .background(AlternativeLight)
                     .padding(16.dp)
             )
             Spacer(modifier = Modifier.height(16.dp))
@@ -66,7 +64,7 @@ fun Offer(title: String, description: String) {
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier
                     .padding(16.dp)
-                    .background(LightBrown)
+                    .background(AlternativeLight)
                     .padding(16.dp)
             )
         }
