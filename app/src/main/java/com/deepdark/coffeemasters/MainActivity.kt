@@ -29,8 +29,12 @@ class MainActivity : ComponentActivity() {
             CoffeeMastersTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
-                ) {
-                    App()
+                ) { outerPaddings ->
+                    Column(
+                        modifier = Modifier.padding(outerPaddings)
+                    ) {
+                        App()
+                    }
                 }
             }
         }

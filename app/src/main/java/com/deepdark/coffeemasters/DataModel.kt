@@ -3,7 +3,7 @@ package com.deepdark.coffeemasters
 class Product(
     var id: Int,
     var name: String,
-    price: Double,
+    var price: Double,
     var image: String
 ) {
     val imageUrl get() = "https://firtman.github.io/coffeemasters/api/images/${this.image}"
@@ -11,10 +11,10 @@ class Product(
 
 class Category(
     var name: String,
-    products: MutableList<Product>
+    var products: MutableList<Product>
 )
 
 class ItemInCart(
     var product: Product,
-    quantity: Int
+    var quantity: Int
 )
