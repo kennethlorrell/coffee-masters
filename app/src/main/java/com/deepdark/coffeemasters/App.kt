@@ -17,7 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.deepdark.coffeemasters.pages.InfoPage
+import com.deepdark.coffeemasters.pages.MenuPage
 import com.deepdark.coffeemasters.pages.OffersPage
+import com.deepdark.coffeemasters.pages.OrderPage
 import com.deepdark.coffeemasters.ui.theme.CoffeeMastersTheme
 import com.deepdark.coffeemasters.ui.theme.Primary
 
@@ -50,10 +53,10 @@ fun App() {
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             when (selectedRoute.value) {
-                Routes.MenuPage.route -> Text("Menu")
+                Routes.MenuPage.route -> MenuPage()
                 Routes.OffersPage.route -> OffersPage()
-                Routes.OrderPage.route -> Text("Orders")
-                Routes.InfoPage.route -> Text("Info")
+                Routes.OrderPage.route -> OrderPage()
+                Routes.InfoPage.route -> InfoPage()
             }
         }
     }
