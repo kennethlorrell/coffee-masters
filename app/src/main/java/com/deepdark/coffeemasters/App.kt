@@ -10,11 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.deepdark.coffeemasters.pages.OffersPage
 import com.deepdark.coffeemasters.ui.theme.CoffeeMastersTheme
 import com.deepdark.coffeemasters.ui.theme.Primary
 
@@ -28,16 +31,30 @@ fun AppPreview() {
 
 @Composable
 fun App() {
+    val selectedRoute = remember {
+        mutableStateOf(Routes.MenuPage.route)
+    }
+
     Scaffold(
         topBar = {
             AppTitle()
         },
         bottomBar = {
-            Text("I am the BottomBar")
+            NavBar(
+                selectedRoute = selectedRoute.value,
+                onChange = { newRoute ->
+                    selectedRoute.value = newRoute
+                }
+            )
         }
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            OffersPage()
+            when (selectedRoute.value) {
+                Routes.MenuPage.route -> Text("Menu")
+                Routes.OffersPage.route -> OffersPage()
+                Routes.OrderPage.route -> Text("Orders")
+                Routes.InfoPage.route -> Text("Info")
+            }
         }
     }
 }
