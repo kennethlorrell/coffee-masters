@@ -1,12 +1,26 @@
 package com.deepdark.coffeemasters
 
+import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class DataManager {
+class DataManager(app: Application): AndroidViewModel(application = app) {
     var menu: List<Category> by mutableStateOf(listOf())
     var cart: List<ItemInCart> by mutableStateOf(listOf())
+
+    init {
+        fetchData()
+    }
+
+    private fun fetchData() {
+        viewModelScope.launch {
+            menu = API.menuService.fetchMenu()
+        }
+    }
 
     fun addToCart(product: Product) {
         var isFound: Boolean = false
