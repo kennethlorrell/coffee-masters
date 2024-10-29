@@ -32,7 +32,7 @@ class DataManager(app: Application): AndroidViewModel(application = app) {
             }
         }
 
-        if (isFound) {
+        if (!isFound) {
             cart = listOf(
                 *cart.toTypedArray(),
                 ItemInCart(product, 1)

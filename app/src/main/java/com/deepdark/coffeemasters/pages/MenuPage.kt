@@ -1,6 +1,5 @@
 package com.deepdark.coffeemasters.pages
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -19,30 +19,42 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.deepdark.coffeemasters.DataManager
 import com.deepdark.coffeemasters.Product
-import com.deepdark.coffeemasters.R
 import com.deepdark.coffeemasters.ui.theme.Alternative
 import com.deepdark.coffeemasters.ui.theme.CardBackground
+import com.deepdark.coffeemasters.ui.theme.Primary
 
 @Composable
 fun MenuPage(dataManager: DataManager) {
     LazyColumn {
-        items(5) {
-            Card(
-                elevation = cardElevation(2.dp),
-                shape = RoundedCornerShape(12.dp),
+        items(dataManager.menu) {
+            Text(
+                it.name,
+                color = Primary,
+                textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .background(CardBackground)
-                    .padding(12.dp)
-            ) {
-                ProductItem(
-                    product = Product(1, "Espresso", 5.5, "1234"),
-                    onAdd = { it }
-                )
+                    .padding(10.dp, 20.dp, 10.dp, 10.dp)
+            )
+            it.products.forEach { product ->
+                Card(
+                    elevation = cardElevation(2.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier
+                        .background(CardBackground)
+                        .padding(12.dp)
+                ) {
+                    ProductItem(
+                        product = product,
+                        onAdd = {
+                            dataManager.addToCart(product)
+                        }
+                    )
+                }
             }
         }
     }
@@ -65,8 +77,8 @@ fun ProductItem(product: Product, onAdd: (Product) -> Unit) {
             .fillMaxWidth()
             .background(Color.White)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.black_coffee),
+        AsyncImage(
+            model = product.imageUrl,
             contentDescription = "Image for ${product.name}",
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
